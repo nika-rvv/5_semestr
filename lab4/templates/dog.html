@@ -1,0 +1,15 @@
+{#{% extends 'base.html' %}#}
+{% load static %}
+{% block title %}Порода: {{ data.name }}{% endblock %}
+{% block content %}
+    <div>{{ data.name }}
+        {% for dog in data.dogs %}
+            {% if dog.name == data.name %}
+                {{ dog.desc }}
+                <br>
+                <img src="{% static dog.img %}" width="900" height="600" alt = "{% static dog.img %}">
+            {% endif %}
+        {% endfor %}
+    </div>
+    <br><a href="{% url 'main' %}">На главную</a>
+{% endblock %}

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" class="h-100" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %} {% endblock %}</title>
+</head>
+<body>
+    <font size="4" color="#696969" face="Roboto">Привет!
+
+        <br>Сегодня {{ data.current_date }}, Московское время {{ data.current_time }}
+        <br> Хочешь узнать что-то новое о собаках? Тогда не уходи отсюда!
+    </font>
+    {% block content %}{% endblock %}
+
+</body>
+</html>
