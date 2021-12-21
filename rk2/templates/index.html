@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Рябова Рк2 РИП</title>
+</head>
+<body class="container">
+    <form method="POST" action="create_language/">
+        {% csrf_token %}
+
+        <h2>Добавление нового языка программирования</h2>
+        <p>
+            <label>Введите название языка</label><br>
+            <input type="text" name="name" />
+        </p>
+        <p>
+            <label>Введите год выпуска</label><br>
+            <input type="text" name="year" />
+        </p>
+        <p>
+            <label>Введите название средства разработки</label><br>
+            <input type="text" name="lang_dev"/>
+        </p>
+        <input type="submit" value="Сохранить" >
+    </form>
+
+    <form method="POST" action="create/">
+        {% csrf_token %}
+
+        <h2>Добавление нового средства разработки</h2>
+        <p>
+            <label>Введите название средства разработки</label><br>
+            <input type="text" name="name_tool" />
+        </p>
+        <input type="submit" value="Сохранить" >
+
+        <h2>Список средств разработки</h2>
+        <table>
+            <tr>
+                <th>Id</th>
+                <th>Название</th>
+            </tr>
+            {% for tool in tools %}
+            <tr>
+                <td>{{ tool.id }}</td>
+                <td>{{ tool.name }}</td>
+                <td><a href="edit_devtool/{{tool.id}}">Изменить</a> | <a href="delete_devtool/{{tool.id}}">Удалить</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+
+
+        {% if languages.count > 0 %}
+        <h2>Список языков программирования</h2>
+        <table>
+            <tr>
+                <th>Id</th>
+                <th>Название</th>
+                <th>Год выпуска</th>
+                <th>Средство разработки</th>
+            </tr>
+            {% for language in languages %}
+            <tr>
+                <td>{{ language.id }}</td>
+                <td>{{ language.name }}</td>
+                <td>{{ language.year }}</td>
+                <td>{{ language.lang_dev.name_tool }}</td>
+                <td><a href="edit/{{language.id}}">Изменить</a> | <a href="delete/{{language.id}}">Удалить</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+            {% endif %}
+
+        {% for tool in tools %}
+            <h3>Язык программирования - средство разработки {{ tool.name }}:</h3>
+            {% for language in languages %}
+                {% if tool.name_tool == language.lang_dev.name_tool %}
+                <li>{{language.name}}</li>
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+    </form>
+</body>
+</html>
+
