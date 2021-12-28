@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Список факультетов{% endblock %}
+
+{% block content %}
+<ul>
+    {% for faculty in data.faculties %}
+       {% include 'faculty.html' with elem=faculty %}
+    {% empty %}
+        <li>Список пуст</li>
+    {% endfor %}
+</ul>
+{% endblock %}
